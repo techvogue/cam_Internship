@@ -28,7 +28,8 @@ export async function POST(req: NextRequest) {
     // Generate JWT token
     const token = jwt.sign({ userId: user.id }, JWT_SECRET, { expiresIn: '24h' });
 
-    // Return user data without password - Fixed ESLint warning
+    // Return user data without password - safely drop password from output
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...userWithoutPassword } = user;
 
     return NextResponse.json({
