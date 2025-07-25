@@ -9,9 +9,11 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")     // pooled URL for app/server
+  directUrl  = env("DIRECT_URL")       // direct URL for migration/seeding (port 5432)
 }
+
 
 model Camera {
   id        Int       @id @default(autoincrement())
